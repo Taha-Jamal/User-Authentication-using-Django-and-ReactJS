@@ -45,7 +45,10 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK ={
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # standard
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # custom
+        'base.authentication.CookiesJWTAuthentication',
     ),
     # to authenticate
     'DEFAULT_PERMISSION_CLASSES': [
