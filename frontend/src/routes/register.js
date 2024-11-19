@@ -7,22 +7,21 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/Auth";
 
-
-
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
-  const {login_user} = useAuth()
-
+  const { register_user } = useAuth();
 
   const nav = useNavigate();
 
-  const handleLogin =  () => {
-    login_user(username,password);
+  const handleSignUp = () => {
+    register_user(username, email, password, confirmPassword);
   };
 
   const handleNavigate = () => {
-    nav("/register");
+    nav("/login");
   };
 
   return (
@@ -42,8 +41,18 @@ const Login = () => {
           bg="white"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
-          type="email"
+          type="text"
           placeholder="Your username here"
+        />
+      </FormControl>
+      <FormControl mb="20px">
+        <FormLabel>Email</FormLabel>
+        <Input
+          bg="white"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          type="email"
+          placeholder="Your email here"
         />
       </FormControl>
       <FormControl>
@@ -56,14 +65,25 @@ const Login = () => {
           placeholder="Your password here"
         />
       </FormControl>
+      <FormControl>
+        <FormLabel>Confirm Password</FormLabel>
+        <Input
+          bg="white"
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={confirmPassword}
+          type="password"
+          placeholder="Your confirm password here"
+        />
+      </FormControl>
+      
       <Button
         mb="10px"
         colorScheme="green"
         mt="20px"
         w="100%"
-        onClick={handleLogin}
+        onClick={handleSignUp}
       >
-        Login
+        Sign Up
       </Button>
       <Text
         onClick={handleNavigate}
@@ -71,10 +91,10 @@ const Login = () => {
         color="gray.600"
         fontSize="14px"
       >
-        Don't have an account? Sign up
+        Already have an account? Log In
       </Text>
     </VStack>
   );
 };
 
-export default Login;
+export default Register;
